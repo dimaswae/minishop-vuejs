@@ -56,6 +56,7 @@ const formattedPrice = computed(() => {
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 20px;
 }
 
 .card:hover {
@@ -67,7 +68,7 @@ const formattedPrice = computed(() => {
 /* img */
 .image-container {
     width: 100%;
-    height: 180px; 
+    height: 100px; 
     background-color: #ffffff;
     display: flex;
     align-items: center;
@@ -77,10 +78,9 @@ const formattedPrice = computed(() => {
 }
 
 .image-container img {
-    max-width: 50%;
-    max-height: 50%;
+    max-width: 100%;
+    max-height: 100px;
     object-fit: contain; 
-    mix-blend-mode: multiply;
 }
 
 /* detail content */

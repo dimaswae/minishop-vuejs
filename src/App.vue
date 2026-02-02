@@ -65,10 +65,8 @@ const handleCart = (product) => {
   display: grid;
   gap: 20px;
   padding: 20px 0;
-  
-  /* MULAI DARI MOBILE (1 Kolom) */
   grid-template-columns: repeat(1, 1fr);
-}
+} 
 
 /* Tablet (2 kolom) */
 @media (min-width: 600px) {
@@ -77,17 +75,10 @@ const handleCart = (product) => {
   }
 }
 
-/* Laptop Kecil (4 kolom) */
-@media (min-width: 900px) {
-  .product-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 /* Desktop Besar (6 KOLOM) */
 @media (min-width: 1200px) {
   .product-grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 </style>
