@@ -10,7 +10,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-  base: "./minishop-vuejs/",
+  base: '/minishop-vuejs/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
