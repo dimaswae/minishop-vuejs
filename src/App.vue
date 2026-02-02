@@ -1,13 +1,13 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue' 
+import { ref, onMounted } from 'vue' 
 
 import DisplayCard from './components/DisplayCard.vue'
 import Header from './components/Header.vue';
 
 const dataProducts = ref({products: []});
 const isLoading = ref(true);
-// const seartchQuery = ref('');
-// const totalCartItems = ref(0);
+
+const cart = ref([]);
 
 // Fetch products from API
 onMounted(async () => {
@@ -21,31 +21,73 @@ onMounted(async () => {
   }
 });
 
-
-
+const handleCart = (product) => {
+  cart.value.push(product);
+  alert(`Berhasil menambahkan ${product.title} ke keranjang!`);
+  // console.log(cart.value);
+}
 </script>
 
 <template>
-  <Header />
-  <div class="app-container">
-    display card test
-    <DisplayCard
-      v-for="product in dataProducts.products"
-      :key="product.id"
-      :product="product"
-      @add-to-cart="(product) => console.log('Add to cart:', product)"
-    />
+  <Header :cart-count="cart.length"/>
+
+  <div v-if="isLoading" class="loading-text">
+    Loading Products...
+  </div>
+
+  <div v-else class="container">
+    <div class="product-grid">
+      <DisplayCard 
+      v-for="item in dataProducts.products" 
+      :key="item.id" 
+      :product="item" 
+      @add-to-cart="handleCart"
+      />
     </div>
+  </div>
 </template>
 
 <style scoped>
-.app-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
-img {
-  max-width: 10%;
-  height: auto;
+
+.loading-text {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.5rem;
+  color: #666;
+}
+
+.product-grid {
+  display: grid;
+  gap: 20px;
+  padding: 20px 0;
+  
+  /* MULAI DARI MOBILE (1 Kolom) */
+  grid-template-columns: repeat(1, 1fr);
+}
+
+/* Tablet (2 kolom) */
+@media (min-width: 600px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Laptop Kecil (4 kolom) */
+@media (min-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop Besar (6 KOLOM) */
+@media (min-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 </style>
