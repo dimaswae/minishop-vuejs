@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const menuItems = ref([
-    { name: 'Home', link: '#' },
-    { name: 'Products', link: '#' },
-    { name: 'About', link: '#' },
-    { name: 'Contact', link: '#' },
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
 ])
 
 defineProps({
@@ -20,15 +21,23 @@ defineProps({
 <nav class="navbar">
     <ul class="menu-list">
         <li v-for="(item, index) in menuItems" :key="index">
-            <a :href="item.link" class="nav-link">{{ item.name }}</a>
+            <router-link :to="item.path" class="nav-link" active-class="active-link">
+                {{ item.name }}
+            </router-link>
         </li>
 
         <div class="divider"></div>
+
         <li>
-            <a href="#cart" class="nav-link icon">🛒 Cart ({{ count }})</a>
+            <router-link to="/cart" class="nav-link icon" active-class="active-link">
+                🛒 Cart ({{ count }})
+            </router-link>
         </li>
+
         <li>
-            <a href="#login" class="nav-button">Login</a>
+            <router-link to="/login" class="nav-button">
+                Login
+            </router-link>
         </li>
     </ul>
 </nav>
@@ -56,6 +65,26 @@ defineProps({
   color: #42b983; 
   text-shadow: 0 0 12px #5affb5, 0 0 25px #5affb5;
     color: #5affb5;
+}
+
+/* active-link */
+
+/* Active State (Style for the current page) */
+.active-link {
+    color: #42b983;
+    font-weight: 700;
+}
+/* Optional: Add a small dot under active link */
+.active-link::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #42b983;
+    border-radius: 50%;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .divider {
