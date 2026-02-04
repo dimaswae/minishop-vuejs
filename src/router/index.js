@@ -1,7 +1,5 @@
-    import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
-// Import komponen halaman (Pastikan file-file ini sudah kamu buat di folder views)
-// Jika belum ada, buat file kosong dulu (misal: HomeView.vue) agar tidak error.
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -15,8 +13,6 @@ const router = createRouter({
     {
       path: '/products',
       name: 'products',
-      // Lazy loading: Component hanya didownload saat user membuka halaman ini
-      // Lebih hemat memori dan performa lebih cepat
       component: () => import('../views/ProductsView.vue')
     },
     {
